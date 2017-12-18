@@ -14,7 +14,7 @@ The web application is configured by an array of YAML files at `config/` directo
 
 Settings may be accessed at any time using `Config` class:
 ```php
-if (Config::get('DEBUG'))     // From local.yaml -> local.yaml and global.yaml don't need a preffix
+if (Config::get('DEBUG'))     // From local.yaml -> local.yaml and global.yaml don't need a prefix
     return Config::get('Bots.VERIFY_TOKEN')    // From bots.yaml
 ```
     
