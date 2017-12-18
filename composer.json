@@ -1,10 +1,10 @@
 {
-	"name": "Dev Team",
-	"description": "A project to test Composer",
-	"license": "MIT",
+	"name": "arsengoian/viper",
+	"description": "A deployment package of Viper - a simple to use multi-functional PHP MVC framework",
+	"license": "Apache-2.0",
 	"authors": [{
 		"name": "Arsen Goian",
-		"email": "mirellastitan@gmail.com"
+		"email": "arsengoian@gmail.com"
 	}],
 	"autoload": {
 		"psr-4": {
