@@ -1,0 +1,10 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_URI} !index\.php
+#Because data should be available to everyone
+RewriteCond %{REQUEST_URI} !data/*
+#Inspector (comment out)
+RewriteCond %{REQUEST_URI} !inspector\.php
+RewriteCond %{REQUEST_URI} !favicon\.ico
+RewriteRule ^([^/]+)(.*)?$ index.php?path=$1$2  [L]

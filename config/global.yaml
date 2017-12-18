@@ -1,0 +1,30 @@
+
+# PHP error_reporting
+Report_errors: Yes
+
+# Some data is stored in GLOBALS array memory.
+# This key is a standard preffix
+# See \Support\Util::RAM
+Ram_key: __VIPER__
+
+# PHP default_timezone_set
+Default_timezone: Europe/Kiev
+
+
+
+# Main layout, Viper entry point
+Master_layout: Main
+
+# Directory with error views
+Error_view: Error
+
+# If no needed view found
+View_fallback: false
+
+# Fallback directory for views and for "/" route
+Default_controller: home
+
+
+# Defines the server root directory
+Root_dir: root
+

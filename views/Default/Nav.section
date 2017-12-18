@@ -1,0 +1,198 @@
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button onclick="bar()" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="<?php $this -> printWebsiteAddress()?>/" style="padding: 5px 0px 5px 10px;">
+				<img alt="Brand" src="/data/imgres/logo.svg" style="height: 100%; width: 300px">
+			</a>
+		</div>
+		<div id="nvbr" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<!--li ng-class="{active: false}">
+					<a href="<?php $this -> printWebsiteAddress()?>/">Главная</a>
+				</li -->
+				<li ng-class="{active: isMenuItemActive(&#39;/&#39;)}" <?php if ($this -> isCurrentView('Default') || $this -> isCurrentView('Category')):?>class="active"<?php endif?> style="">
+					<a href="<?php $this -> printWebsiteAddress()?>/">Главная</a>
+				</li>
+				<li ng-class="{active: isMenuItemActive(&#39;/about&#39;)}" <?php if ($this -> isCurrentView('About')):?>class="active"<?php endif?> style="">
+					<a href="<?php $this -> printWebsiteAddress()?>/about">О нас</a>
+				</li>
+				<li ng-class="{active: isMenuItemActive(&#39;/contacts&#39;)}" <?php if ($this -> isCurrentView('Contacts')):?>class="active"<?php endif?> style="">
+					<a href="<?php $this -> printWebsiteAddress()?>/contacts">Контакты</a>
+				</li>
+			</ul>
+			<!-- TODO Hide search? -->
+			<form class="navbar-form navbar-left search ng-pristine ng-valid" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Поиск..." value="<?php if (isset($DATA['sstr'])) echo $DATA['sstr'] ?>" id="searchbox">
+				</div><button type="button" class="btn btn-default" onclick="doSearch()">
+				  	<i class="fa fa-search" aria-hidden="true"></i>
+				</button>
+			</form>
+
+			<?php if (isset($DATA['session']) && $DATA['session']["auth"]):?>
+			
+				<script>
+					function cat_del(event, dat) {
+						window.location.href='/category/' + dat.parentNode.dataset.id + '/delete/';
+						event.preventDefault();
+					}
+					function pr_del(event, dat) {
+						window.location.href='/product/' + dat.parentNode.dataset.id + '/delete/';
+						event.preventDefault();
+					}
+					function cat_edt(event, dat) {
+						window.location.href='/category/' + dat.parentNode.dataset.id + '/edt/';
+						event.preventDefault();
+					}
+					function pr_edt(event, dat) {
+						window.location.href='/product/' + dat.parentNode.dataset.id + '/edt/';
+						event.preventDefault();
+					}
+			
+			
+			
+							var ch = '<div style="display: flex; flex-direction: row; justify-content: space-between; width: 32em; margin: 5px"><button style="transform: rotate(45deg); background-color: red; border: none; height: 2em; width: 2em; border-radius: 1em; padding: 6px" class="price" onclick="removeChar(event, this)"> + </button><input placeholder="Введите характеристику" name="charn$" style="width: 14em; height:2em" required><input placeholder="Введите значение" name="charv$" style="width: 14em; height:2em" required></div>';
+							function getNumChar(div) {
+								return div.dataset.num;
+							}
+							function addChar(div) {
+								div.dataset.num++;
+								var nstr = ch.replace('$', getNumChar(div));
+								nstr = nstr.replace('$', getNumChar(div));
+								div.innerHTML += nstr;
+							}
+							function removeChar(event,div) {
+								event.preventDefault();
+								// CRUTCH
+								a = div.parentNode;
+								a.innerHTML = '';
+								a.style.display = "none";
+								div.dataset.num--;
+							}
+							function react(event, link){
+								event.preventDefault();
+								addChar(document.getElementById(link));
+							}
+						</script>
+				<div id="admin-bar">
+					<?php if ($this -> viewname == 'Category' || $this -> viewname == 'Product'):?>
+
+					<?php endif; if($this -> viewname == 'Category'):?>
+						<div id="cat-edit-form"
+							style="<?php if(!isset($DATA['edt'])) echo 'display: none;' ; else echo 'display: flex;';?> position:fixed; left: 0; top: 0; height: 100vh; width:100vw; justify-content: center; align-items: center; background-color: rgba(0,0,0,0.82)">
+							<form method="post"  class="pop-up" action="/category/<?php echo $DATA['currentcatt']?>/edit"
+								style="background-color: #F5F5F5; padding: 4%; border-radius: 2%">
+								<span style="width: 6em; display: inline-block;">Название: </span><input style="width: 14em; height:2em" name='name' value="<?php echo $DATA['name']?>" required><br><br>
+								<span style="width: 6em; display: inline-block;">Адрес: </span><input style="width: 14em; height:2em" name='token'  value="<?php echo $DATA['token']?>" required><br><br>
+								<span style="width: 6em; display: inline-block;">Описание: </span>
+								<textarea style="width: 14em; height: 6em; user-resize: none" name='description' required><?php echo $DATA['description']?></textarea><br><br>
+								<input type="submit" value="ИЗМЕНИТЬ КАТЕГОРИЮ" style="border: none" class="price">
+							<section>+</section></form>
+							
+						</div>
+					<?php endif; if ($this -> viewname == 'Category' || $this -> viewname == 'Default'):?>
+						<div id="pr-add-form"
+							style="overflow: auto; display: none; position:fixed; left: 0; top: 0; height: 100vh; width:100vw; justify-content: center; align-items: center; background-color: rgba(0,0,0,0.82)">
+							<form method="post" class="pop-up" enctype="multipart/form-data" action="/product/add"
+								style="background-color: #F5F5F5; padding: 4%; border-radius: 2%">
+								<span style="width: 6em; display: inline-block;">Название: </span>
+								<input style="width: 14em; height:2em" name='name' required><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Адрес: </span>
+								<input style="width: 14em; height:2em" name='token' required><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Цена: </span>
+								<input type="number" style="width: 5em; height:2em" name='priceG' required><span>   грн   </span>
+								<input type="number" style="width: 5em; height:2em" name='priceC' required><span>   коп   </span><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Категория: </span>
+								<select style="width: 14em; height:2em" name="category_id">
+									<?php foreach (\Models\Category::all() as $cat):?>
+										<option value="<?php echo $cat['id']?>"><?php echo $cat['name']?></option>
+									<?php endforeach?>
+								</select><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Описание: </span>
+								<textarea style="width: 14em; height: 6em; user-resize: none" name='description' required></textarea><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Картинка: </span>
+								<input type="file" style="width: 14em; height:2em" name='img' required><br>
+								
+								<span style="width: 6em; display: inline-block;">Характеристики: </span>
+								<div id="admin-characteristics-add" data-num="1">
+									<div style="display: flex; flex-direction: row; justify-content: space-between; width: 32em; margin: 5px">
+										<button style="transform: rotate(45deg); background-color: red; border: none; height: 2em; width: 2em; border-radius: 1em; padding: 6px" class="price" onclick="removeChar(event, this)"> + </button>
+										<input placeholder="Введите характеристику" name="charn1" style="width: 14em; height:2em" required>
+										<input placeholder="Введите значение" name="charv1" style="width: 14em; height:2em" required>
+									</div>
+								</div>
+								<button style="border: none; height: 2em; width: 2em; border-radius: 1em; padding: 6px; margin: 5px" class="price" onclick="react(event, 'admin-characteristics-add')">+</button><br><br>
+								
+								<input type="submit" value="ДОБАВИТЬ ТОВАР" style="border: none" class="price">
+							<section>+</section></form>
+							
+						</div>
+					<?php elseif ($this -> viewname == 'Product'):?>
+						<div id="pr-edit-form" class="pop-up"
+							style="<?php if(!isset($DATA['edt'])) echo 'display: none;' ; else echo 'display: flex;';?> position:fixed; left: 0; top: 0; height: 100vh; width:100vw; justify-content: center; align-items: center; background-color: rgba(0,0,0,0.82); overflow: auto">
+							<form method="post" class="pop-up" enctype="multipart/form-data" action="/product/<?php echo $DATA['token']?>/edit"
+								style=" background-color: #F5F5F5; padding: 4%; border-radius: 2%">
+								<span style="width: 6em; display: inline-block;">Название: </span>
+								<input style="width: 14em; height:2em" name='name' required value="<?php echo $DATA['prod']['name']?>"><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Адрес: </span>
+								<input style="width: 14em; height:2em" name='token' required value="<?php echo $DATA['prod']['token']?>"><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Цена: </span>
+								<input type="number" style="width: 5em; height:2em" name='priceG' required value="<?php echo $DATA['prod']['price'] / 100?>"><span>   грн   </span>
+								<input type="number" style="width: 5em; height:2em" name='priceC' required value="<?php echo $DATA['prod']['price'] % 100?>"><span>   коп   </span><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Категория: </span>
+								<select style="width: 14em; height:2em" name="category_id">
+									<?php foreach (\Models\Category::all() as $cat):?>
+										<option value="<?php echo $cat['id']?>"<?php if ($DATA['prod']['category_id'] == $cat['id']):?>selected<?php endif?>><?php echo $cat['name']?></option>
+									<?php endforeach?>
+								</select><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Описание: </span>
+								<textarea style="width: 14em; height: 6em; user-resize: none" name='description' required><?php echo $DATA['prod']['description']?></textarea><br><br>
+								
+								<span style="width: 6em; display: inline-block;">Картинка: </span>
+								<input type="file" style="width: 14em; height:2em" name='img'><br>
+								
+								<span style="width: 6em; display: inline-block;">Характеристики: </span>
+								<?php if (!isset($DATA['prod']['characteristics']) || count($DATA['prod']['characteristics'] == 0)):?>
+									<div id="admin-characteristics-add" data-num="1">
+										<div style="display: flex; flex-direction: row; justify-content: space-between; width: 32em; margin: 5px">
+											<button style="transform: rotate(45deg); background-color: red; border: none; height: 2em; width: 2em; border-radius: 1em; padding: 6px" class="price" onclick="removeChar(event, this)"> + </button>
+											<input placeholder="Введите характеристику" name="charn1" style="width: 14em; height:2em" required>
+											<input placeholder="Введите значение" name="charv1" style="width: 14em; height:2em" required>
+										</div>
+									</div>
+								<?php else: $c = 0; foreach ($it = unserialize($DATA['prod']['characteristics']) as $k => $v): $c++?>
+									<div id="admin-characteristics-edit" data-num="<?php echo count($it)?>">
+										<div style="display: flex; flex-direction: row; justify-content: space-between; width: 32em; margin: 5px">
+											<button style="transform: rotate(45deg); background-color: red; border: none; height: 2em; width: 2em; border-radius: 1em; padding: 6px" class="price" onclick="removeChar(event, this)"> + </button>
+											<input placeholder="Введите характеристику" name="charn<?php echo $c?>" style="width: 14em; height:2em" required value="<?php echo $k?>">
+											<input placeholder="Введите значение" name="charv<?php echo $c?>" style="width: 14em; height:2em" required value="<?php echo $v?>">
+										</div>
+									</div>								
+								<?php endforeach; endif?>
+								<button style="border: none; height: 2em; width: 2em; border-radius: 1em; padding: 6px; margin: 5px" class="price" onclick="react(event, 'admin-characteristics-edit')">+</button><br><br>
+								
+								<input type="submit" value="ИЗМЕНИТЬ ТОВАР" style="border: none" class="price">
+							<section>+</section></form>
+							
+						</div>
+					<?php endif?>
+				</div>
+			<?php endif?>
+		</div>
+	</div>
+</nav>

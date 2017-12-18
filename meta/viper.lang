@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  @author Arsen Goian
+  
+  Styles:  
+    <style name="viper:bracket" foreground="#aa1919" background="#ffff33" bold="true"  italic="false"/>
+    <style name="viper:italic" background="#ffffcc" italic="true"/>
+-->
+<language id="viper" _name="Viper View" version="2.0" _section="Markup">
+    <metadata>
+      <property name="mimetypes">application/x-viper</property>
+      <property name="globs">*.vp;*.viper</property>
+      <property name="block-comment-start">&lt;!--</property>
+      <property name="block-comment-end">--&gt;</property>
+    </metadata>
+
+    <styles>
+        <style id="bracket" _name="Bracket" map-to="viper:bracket"/>
+        <style id="php-inside" _name="Italic" map-to="viper:italic"/>
+    </styles>
+
+    <default-regex-options case-sensitive="false"/>
+
+    <definitions>  
+
+      <context id="inner-php">
+      <include>
+        <context ref="php:cpp-line-comment"/>
+        <context ref="php:bash-line-comment"/>
+        <context ref="php:c-block-comment"/>
+        <context ref="php:double-quoted-string"/>
+        <context ref="php:single-quoted-string"/>
+        <context ref="php:backtick-string"/>
+        <context ref="php:here-doc-string"/>
+        <context ref="php:now-doc-string"/>
+        <context ref="php:variable"/>
+        <context ref="php:array-operators"/>
+        <context ref="php:keywords"/>
+        <context ref="php:operators"/>
+        <context ref="php:type"/>
+        <context ref="php:null-value"/>
+        <context ref="php:boolean"/>
+        <context ref="php:float"/>
+        <context ref="php:decimal-number"/>
+        <context ref="php:octal-number"/>
+        <context ref="php:hexadecimal-number"/>
+      </include>
+    </context>    
+            
+        
+    <context id="viper-php-block" style-ref="php-inside" style-inside="true">
+      <start>&lt;@</start>
+      <end>@&gt;</end>
+      <include>
+        <context sub-pattern="0" where="start" style-ref="bracket"/>
+        <context sub-pattern="0" where="end" style-ref="bracket"/>
+        <context ref="inner-php"/>
+      </include>
+    </context>
+    
+    
+    <context id="viper-construction" style-ref="php-inside" style-inside="true">
+      <start>[@][a-zA-Z_][a-zA-Z0-9_]*[(]</start>
+      <end>[)][:]</end>
+      <include>
+        <context sub-pattern="0" where="start" style-ref="bracket"/>
+        <context sub-pattern="0" where="end" style-ref="bracket"/>
+        <context style-ref="bracket" end-parent="true">
+          <match>[)][;]</match>
+        </context>
+        <context ref="inner-php"/>
+      </include>
+    </context>
+    
+    
+    
+    <context id="viper-helper" style-ref="php-inside" style-inside="true">
+      <start>[@][a-zA-Z_][a-zA-Z0-9_]*[{]</start>
+      <end>[}][:]</end>
+      <include>
+        <context sub-pattern="0" where="start" style-ref="bracket"/>
+        <context sub-pattern="0" where="end" style-ref="bracket"/>
+        <context style-ref="bracket" end-parent="true">
+          <match>[}][;]</match>
+        </context>
+        <context ref="inner-php"/>
+      </include>
+    </context>
+    
+
+    
+    <context id="viper-array" style-ref="php-inside" style-inside="true">
+      <start>[@][a-zA-Z_][a-zA-Z0-9_]*[\[]</start>
+      <include>
+        <context sub-pattern="0" where="start" style-ref="bracket"/>
+        <context sub-pattern="0" where="end" style-ref="bracket"/>
+        <context style-ref="bracket" end-parent="true">
+          <match>[]][;]?</match>
+        </context>
+        <context ref="inner-php"/>
+      </include>
+    </context>
+    
+    
+
+    <context id="viper-expr" style-ref="bracket">
+      <match>[@][a-zA-Z_][a-zA-Z0-9_]*[:;]?</match>
+    </context>
+    
+    <context id="viper-cancel" style-ref="bracket">
+      <match>[@][@]</match>
+    </context>
+    
+    
+    <replace id="html:embedded-lang-hook" ref="viper"/>
+    
+    
+    <context id="viper" class="no-spell-check">
+      <include>
+        <context ref="viper-cancel"/>
+        <context ref="viper-php-block"/>
+        <context ref="viper-helper"/>
+        <context ref="viper-construction"/>
+        <context ref="viper-array"/>
+        <context ref="viper-expr"/>
+
+        <context ref="html:html"/>
+      </include>
+    </context>
+    
+    </definitions>
+    
+</language>

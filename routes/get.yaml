@@ -1,0 +1,23 @@
+
+# GET REQUEST ROUTING FILE
+
+# Routes will be automatically redirected
+#  to the controller with the correspondent name.
+#  For example, DOMAIN/products will be directed to
+#  ProductsController::get($http_params).
+#  DOMAIN/products/suggestions -> ProductsController::suggestions($http_params)
+
+# The following may be done to set up paths:
+
+# welcome: DefaultController         --- directs DOMAIN/welcome -> DefaultController::get($http_params)
+# hello: DefaultController.main      --- directs DOMAIN/hello   -> DefaultController::main($http_params)
+# products:                          --- 1-level hierarchies are also supported
+#    parse: DefaultController
+#    count: DefaultController.main
+
+# Routes in this file will only influence GET requests.
+#  To set up POST, PUT, PATCH or DELETE requests
+#  edit the corresponding files
+
+
+add: HomeController.add

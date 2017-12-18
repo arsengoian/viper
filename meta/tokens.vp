@@ -1,0 +1,366 @@
+
+
+<!----------------------------------
+	Full list of Viper tokens
+------------------------------------
+	
+		VT_HTML					string
+		VT_AT
+		VT_VAR					string
+		
+		VT_ARGS					string
+		VT_CONTINUE
+		
+		VT_EMBEDDED_OPEN
+		VT_EMBEDDED_EXEC		string
+		VT_EMBEDDED_END		
+		VT_ARRAY_OPEN			string
+		VT_ARRAY_CLOSE
+		VT_FUNCTION_OPEN		string
+		VT_FUNCTION_CLOSE
+		VT_HELPER_OPEN			string
+		VT_HELPER_CLOSE
+		VT_HELPER_CONTINUE
+		VT_ENDHELPER
+		
+		VT_IF
+		VT_ELSEIF
+		VT_ELSE
+		VT_ENDIF
+		VT_FOR
+		VT_ENDFOR
+		VT_FOREACH
+		VT_ENDFOREACH
+		VT_WHILE
+		VT_ENDWHILE
+		VT_SWITCH
+		VT_CASE
+		VT_DEFAULT
+		VT_ENDSWITCH
+
+----------------------------------->
+
+
+<!----------------------------------
+		  Viper tokens doc
+------------------------------------
+
+	VT_HTML
+	
+	VT_AT
+	
+	VT_EMBEDDED_OPEN
+		VT_EMBEDDED_EXEC
+			VT_EMBEDDED_END
+	
+	VT_VAR
+	
+	VT_ARRAY_OPEN
+		VT_ARGS
+			VT_ARRAY_CLOSE
+	
+	VT_FUNCTION_OPEN
+		VT_ARGS
+			VT_FUNCTION_CLOSE		
+
+	VT_HELPER_OPEN
+		VT_ARGS
+			VT_HELPER_CLOSE
+			VT_HELPER_CONTINUE
+				*
+				VT_ENDHELPER
+				
+	VT_IF
+		VT_ARGS
+			VT_CONTINUE
+				*
+				VT_ELSEIF
+					*
+					VT_ELSE
+					VT_ENDIF
+				VT_ELSE
+					*
+					VT_ENDIF
+				VT_ENDIF
+	
+	VT_FOR
+		VT_ARGS
+			VT_CONTINUE
+				*
+				VT_ENDFOR
+				
+	VT_FOREACH
+		VT_ARGS
+			VT_CONTINUE
+				*
+				VT_ENDFOREACH
+				
+	VT_WHILE
+		VT_ARGS
+			VT_CONTINUE
+				*
+				VT_ENDWHILE
+				
+	VT_SWITCH
+		VT_ARGS
+			VT_CONTINUE
+				*
+				VT_CASE
+					VT_ARGS
+						VT_CONTINUE
+							*
+							VT_CASE ...
+				VT_DEFAULT
+					*
+				VT_ENDSWITCH
+
+----------------------------------->
+
+
+
+
+
+<!-- TOKENS DOCUMENTATION -->
+<!-- Return is printed to output; if not printable - error is thrown -->
+
+
+<!-- VT_HTML -->
+<!-- Non-viper code or comment -->
+
+<img src="/data/img0.png" alt="sheep"/>
+
+
+
+
+
+
+<!-- VT_AT -->
+<!-- Cancel Viper parsing -->
+
+<p>Contact: arsen@@fideinc.com</p>
+
+
+
+
+
+
+<!-- VT_VAR -->
+<!-- View private variable -->
+<!-- Element of DATA array -->
+<!-- Any variable in local context, including helper output -->
+
+@var
+@var2;
+<a href="@link;address">
+
+
+
+
+
+
+<!-- VT_ARRAY_OPEN -->
+<!-- VT_ARGS -->
+<!-- VT_ARRAY_CLOSE -->
+<!-- Element of array view private variable -->
+<!-- Element of array child of DATA -->
+<!-- Element of any array in local context, including helper output -->
+
+@session["HTTPS"]
+@env["REQUEST_URI"];
+<img src="@cookie['profile_pic'];.png">
+
+
+
+
+
+
+<!-- VT_FUNCTION_OPEN -->
+<!-- VT_ARGS -->
+<!-- VT_FUNCTION_CLOSE -->
+<!-- Any view class method -->
+<!-- Any global function -->
+
+@strlen($string, 1, 1);
+@json_encode( array("data" => base64_encode($var)) );
+
+
+
+
+
+
+<!-- VT_HELPER_OPEN -->
+<!-- VT_ARGS -->
+<!-- VT_HELPER_CLOSE -->
+<!-- Any method of the helper trait -->
+
+@strlen{$string, 1, 1};
+@strlen{ $a, new class($b) extends Customer(
+	function __construct($var) {
+		$this -> v = $var;
+	}
+) };
+
+
+
+<!-- VT_HELPER_OPEN -->
+<!-- VT_ARGS -->
+<!-- VT_HELPER_CONTINUE -->
+<!-- Any method of the helper trait -->
+
+@pop_up{"40%","60%"}:
+	<div> Pop-up contents </div>
+<!-- VT_ENDHELPER -->
+
+@end
+@end;
+
+
+
+
+
+
+<!-- VT_IF -->
+<!-- VT_ARGS -->
+<!-- VT_CONTINUE -->
+<!-- * -->
+<!-- Logical expression -->
+
+@if($a > 18):
+	<br>
+
+<!-- VT_ELSEIF -->
+
+@elseif($a == 18):
+	<i> Okay </i>
+
+<!-- VT_ELSE -->
+	
+@else
+@else:
+	<b> Not okay </b>
+	
+<!-- VT_ENDIF -->
+
+@endif
+@endif;
+
+
+
+
+
+
+<!-- VT_FOR -->
+<!-- VT_ARGS -->
+<!-- VT_CONTINUE -->
+<!-- * -->
+<!-- For loop -->
+
+@for($a = 0; $a < 42; $a++):
+	<p>@a</p>
+	
+<!-- VT_ENDFOR -->
+
+@endfor
+@endfor;
+
+
+
+
+
+
+<!-- VT_FOREACH -->
+<!-- VT_ARGS -->
+<!-- VT_CONTINUE -->
+<!-- * -->
+<!-- Foreach loop -->
+
+@foreach($arr as $obj):
+	@foreach($obj as $k => $v):
+		<p>@v</p>
+	
+<!-- VT_ENDFOREACH -->
+
+@endforeach
+@endforeach;
+
+
+
+
+
+
+<!-- VT_WHILE -->
+<!-- VT_ARGS -->
+<!-- VT_CONTINUE -->
+<!-- * -->
+<!-- While loop -->
+
+@while( $a = $collection -> fetchNew() ):
+	<p>@a</p>
+	
+<!-- VT_ENDWHILE -->
+
+@endwhile
+@endwhile;
+
+
+
+
+
+
+<!-- VT_SWITCH -->
+<!-- VT_ARGS -->
+<!-- VT_CONTINUE -->
+<!-- * -->
+<!-- Switch operator -->
+
+@switch($num):
+
+<!-- VT_CASE -->
+<!-- VT_ARGS -->
+<!-- VT_CONTINUE -->
+<!-- * -->
+<!-- What's before first case statement is trimmed off -->
+
+	@case(1):
+		<div>Access granted</div>
+
+<!-- VT_DEFAULT -->
+	@default
+	@default:
+		<p>No access</p>
+
+	
+<!-- VT_ENDSWITCH -->
+
+@endswitch
+@endswitch;
+
+
+
+
+
+
+<!-- VT_EMBEDDED_OPEN -->
+<!-- VT_EMBEDDED_EXEC -->
+<!-- VT_EMBEDDED_END -->
+<!-- Execute external code -->
+
+<@ $var = 9 @>
+
+<@
+	
+	\Core\App::db() -> selectall("Products");
+	
+@>
+
+
+
+
+
+
+
+
+
+
+
+

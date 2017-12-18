@@ -1,0 +1,26 @@
+
+# Allow logging and debug features
+Debug: Yes
+
+# App domain
+Domain: devcomposertest
+
+# If "Yes", will send a quick redirect to https
+Require_https: No
+
+
+# MySQL database parameters
+Db_host: localhost
+Db_user: arsen
+Db_pass: TreeHugger12345
+Db_name: Dev
+Db_charset: utf8
+
+# Settings on whether the database should be writable
+Db_allow_write: true
+Db_allow_overwrite: true
+Db_allow_delete: true
+
+# May be used for API debugging,
+# needs prettyprint=true JSON parameter
+Pretty_print: true

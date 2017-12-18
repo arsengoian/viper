@@ -1,0 +1,8 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<title>ДРЕВ-ко<?php if(isset($DATA['title'])) echo ' - ',$DATA['title']?></title>
+<!--<base href="/">--><base href=".">      
+<link href="/data/styles/css.css" rel="stylesheet" type="text/css">
+<link href="/data/styles/app.css" rel="stylesheet" type="text/css">
+<?php if (file_exists(ROOT."/data/styles/custom/{$this -> viewname}.css")):?>
+	<link href="/data/styles/<?php echo $this -> viewame?>.css" rel="stylesheet" type="text/css">
+<?php endif?>

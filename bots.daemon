@@ -1,0 +1,9 @@
+<?php
+
+    // To use from command line
+
+    use App\App;
+
+    require 'bootstrap.php';
+
+    App::routeDaemon($argv);

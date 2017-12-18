@@ -1,0 +1,45 @@
+
+# DB table to store data. If missing, will be copied from the model name
+table: Products
+
+# Every model will be auto-complemented with a primary key unique "id" column
+# Sets the length of ID's
+# "id?" column has signature of CHAR(<LENGTH>), and will contain HEX of the length <LENGTH>
+idSpace: 10
+
+# Allows overwriting existing information in database
+# and modifying database structure automatically if needed
+allowOverwrite: true
+
+# List of columns in database (besides "id")
+# The model will have these available for reading and writing
+# via ArrayAccess: $product['name']
+fields:
+  # Most MySQL types are supported
+  names: DATE
+  description: TEXT
+  # Sizes and constraints will automatically be parsed
+  counter: CHAR(200) NOT NULL
+  url, slug: VARCHAR(15) NOT NULL
+  category_id: CHAR(8)
+  # Columns with identical signature may be joined with a comma
+  price, offer_price: INT
+  # Default values are also supported
+  add_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+# Lists constraints to be applied
+constraints:
+  # Comma-separated list of columns
+  unique: url, slug
+  # Lists key - value pairs
+  foreignKeys:
+    category_id: Categories(id)
+  # Will be applied to the respective columns. May use any functions or so
+  checks:
+    price, offer_price: <=100
+
+# Migrations will be run if fatal errors occur due to missing columns
+# or may be run manually from the code or command line
+migrations:
+  title: names
+

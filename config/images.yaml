@@ -1,0 +1,16 @@
+
+# Will the images be cropped?
+Crop: true
+
+# Format: WxH
+Ratio: 70x70
+
+# In pixels. Set to false or 0 to ignore
+Max_width: 60
+
+# The directory where files will be
+# accessible to the server
+Img_dir: data/img
+
+# If image has higher resolution, will throw an ImageError
+Max_size: 1048576

@@ -1,0 +1,31 @@
+<div id="product" class="col-md-12">
+	<h1><@$DATA['prod']['name']@></h1>
+	<div class="row" class="col-md-16" style="display: flex">
+		<div class="col-md-16">
+			<div>
+				<img style="width: 300px; border-radius: 5px" src="<?php echo $DATA['prod']['img'];?>" alt="<?php echo $DATA['prod']['name'];?>">
+			</div>
+			<!--photo-gallery photos="product.images" img-click="setImage"/-->
+			<div class="price" style="margin-top: 10px"><@$DATA['prod']['price']/100 .'.'. (($v = $DATA['prod']['price'] % 100) < 10 ? '0'.$v : $v)@> &#8372;</div>
+		</div>
+		<div class="col-md-16">
+			<div ng-show="product.characteristics.length > 0">
+				@if($DATA['prod']['characteristics']):
+					<h2>Характеристики</h2>
+					@foreach(unserialize($DATA['prod']['characteristics']) as $k => $v):
+						<div class="row" >
+							<div class="col-md-8">@k</div>
+							<div class="col-md-8">@v</div>
+						</div>
+					@endforeach
+				@endif
+			</div>
+			<div ng-show="product.description != ''">
+				<h2>Описание</h2>
+				<div>
+					<@$DATA['prod']['description']@>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
