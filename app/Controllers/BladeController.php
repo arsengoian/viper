@@ -11,12 +11,11 @@ namespace App\Controllers;
 
 use Viper\Core\Routing\Controller;
 use Viper\Core\Routing\Methods\GET;
-use Viper\Core\View;
 use Viper\Core\Viewable;
 use App\Models\Client;
 
 /**
- * Sample controller class
+ * Blade view controller class
  * @package App\Controllers
  */
 class BladeController extends Controller implements GET
@@ -30,7 +29,7 @@ class BladeController extends Controller implements GET
     public function get (...$args): ?Viewable
     {
         $clients = Client::all();
-        return new View('Home', ['clients' => $clients]);
+        return blade('Home', ['clients' => $clients]);
     }
 
     /**
@@ -39,6 +38,15 @@ class BladeController extends Controller implements GET
      */
     public function add(): ?Viewable
     {
-        return new View('Home/Add');
+        return blade('Add');
+    }
+
+    /**
+     * Provoking an error
+     * @return null|Viewable
+     */
+    public function provoke(): ?Viewable
+    {
+        return blade('Die');
     }
 }

@@ -9,7 +9,6 @@
 namespace App\Controllers;
 
 
-use Viper\Core\RedirectView;
 use Viper\Core\Routing\Controller;
 use Viper\Core\Routing\Methods\POST;
 use Viper\Core\Viewable;
@@ -30,6 +29,6 @@ class UsersController extends Controller implements POST
         $v -> email('email');
 
         Client::registerWithImages($this -> params(), $this -> files());
-        return new RedirectView('/');
+        return redirect('/');
     }
 }

@@ -8,6 +8,7 @@
 
 namespace App;
 
+use App\Filters\BladeFilter;
 use Viper\Core\FilterCollection;
 use App\Filters\Authorization;
 use Viper\Core\Routing\Filters\LocalizationFilter;
@@ -23,7 +24,9 @@ class Application extends \Viper\Core\Application
     {
         return new FilterCollection([
             LocalizationFilter::class,
-            Authorization::class
+            Authorization::class,
+
+            BladeFilter::class
         ]);
     }
 }

@@ -9,10 +9,8 @@
 namespace App\Controllers;
 
 
-use Viper\Core\Routing\App;
 use Viper\Core\Routing\Controller;
 use Viper\Core\Routing\Methods\GET;
-use Viper\Core\View;
 use Viper\Core\Viewable;
 use App\Models\Client;
 
@@ -31,7 +29,7 @@ class HomeController extends Controller implements GET
     public function get (...$args): ?Viewable
     {
         $clients = Client::all();
-        return new View('Home', ['clients' => $clients]);
+        return view('Home', ['clients' => $clients]);
     }
 
     /**
@@ -40,6 +38,6 @@ class HomeController extends Controller implements GET
      */
     public function add(): ?Viewable
     {
-        return new View('Home/Add');
+        return view('Home/Add');
     }
 }

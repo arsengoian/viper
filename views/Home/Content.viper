@@ -1,5 +1,5 @@
 <p> @lang('randomStr'); </p>
-<a href="/add"> @lang('addMore'); </a>
+<a href="@url('add');"> @lang('addMore'); </a>
 <table>
     <tr>
         <th> @lang('name'); </th>
