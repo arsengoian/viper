@@ -9,6 +9,7 @@
 namespace App\Models;
 
 use Viper\Core\Model\AsyncModel;
+use Viper\Core\Model\Model;
 use Viper\Core\Model\Traits\Depictable;
 
 /**
@@ -24,7 +25,7 @@ use Viper\Core\Model\Traits\Depictable;
  *
  * @package App\Models
  */
-class Client extends AsyncModel
+class Client extends Model
 {
     use Depictable;
 }

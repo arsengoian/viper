@@ -9,6 +9,7 @@
 namespace App\Filters;
 
 
+use App\Controllers\UsersController;
 use Viper\Core\Filter;
 
 /**
@@ -19,6 +20,12 @@ use Viper\Core\Filter;
  */
 class Authorization extends Filter
 {
+    public function whiteListRoutes (): ?array
+    {
+        return [
+            'users',
+        ];
+    }
 
     /**
      * Sets a dummy sample header for all users

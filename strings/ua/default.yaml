@@ -1,0 +1,15 @@
+
+header: Тест "клієнти"
+
+randomStr:
+  Покращена версія
+  Рандомний рядок
+  1952871492874
+
+addMore: Додати      # Be careful! If this were called 'add', an array from add.yaml file would be returned instead
+                     # It is recommended to put all non-default .yaml files to 'default' dir
+
+name: Ім'я
+email: Email
+age: Вік
+img: Картинка

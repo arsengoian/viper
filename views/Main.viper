@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Test Clients</title>
+    <title> @lang('header'); </title>
     <meta charset="UTF-8">
     <style>
         td, th {

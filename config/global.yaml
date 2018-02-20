@@ -12,6 +12,19 @@ Default_timezone: Europe/Kiev
 
 
 
+
+
+# Fallback directory for views and for "/" route
+Default_controller: home
+
+
+# Defines the server root directory
+Root_dir: root
+
+
+
+# Viper parsing engine settings
+
 # Main layout, Viper entry point
 Master_layout: Main
 
@@ -21,10 +34,16 @@ Error_view: Error
 # If no needed view found
 View_fallback: false
 
-# Fallback directory for views and for "/" route
-Default_controller: home
 
+# Localization settings
 
-# Defines the server root directory
-Root_dir: root
+# If 'Yes', will automatically parse locale from first URL segment
+# if none found, will be default locale
+Auto_locale: Yes
 
+# Supported locales: Viper\Core\Routing\Filters\LocalizationFilter
+# List of locales active in application in order of precedence. First is default
+App_locales: ua, ru, en
+
+# Strings in these dir will be recognized without any prefixes
+Default_locale_module: default
