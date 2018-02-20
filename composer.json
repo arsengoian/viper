@@ -17,5 +17,8 @@
 		"pimax/fb-messenger-php": "v1.0",
 		"arsengoian/viper-framework": "dev-master",
 		"arsengoian/viper-blade": "dev-master"
+	},
+	"suggest": {
+		"arsengoian/bot-mother" : "Nice for cross-platform messenger bots creation"
 	}
 }
