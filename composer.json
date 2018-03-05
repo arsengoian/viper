@@ -14,7 +14,9 @@
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=7.1.0",
-		"pimax/fb-messenger-php": "v1.0",
 		"arsengoian/viper-framework": "dev-master"
+	},
+	"suggest": {
+		"arsengoian/botmother": "Useful for cross-platform bot developent"
 	}
 }
