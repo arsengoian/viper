@@ -1,7 +1,10 @@
+
+
+
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title> @lang('header'); </title>
+    <title> {{lang('header')}} </title>
     <meta charset="UTF-8">
     <style>
         td, th {
@@ -20,7 +23,7 @@
 </head>
 
 <body>
-    @build('Content');
+    @yield('Content')
 </body>
 
 </html>

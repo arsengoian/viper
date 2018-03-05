@@ -1,11 +1,11 @@
-<p> Enhanced version </p>
-<a href="/add">Add more</a>
+<p> @lang('randomStr'); </p>
+<a href="@url('add');"> @lang('addMore'); </a>
 <table>
     <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Age</th>
-        <th>Img</th>
+        <th> @lang('name'); </th>
+        <th> @lang('email'); </th>
+        <th> @lang('age'); </th>
+        <th> @lang('img'); </th>
     </tr>
     @foreach($clients as $client):
         <tr>

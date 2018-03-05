@@ -17,6 +17,7 @@
 		"arsengoian/viper-framework": "dev-master"
 	},
 	"suggest": {
-		"arsengoian/botmother": "Useful for cross-platform bot developent"
+		"arsengoian/botmother": "Useful for cross-platform bot developent",
+		"arsengoian/viper-blade": "dev-master"
 	}
 }

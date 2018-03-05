@@ -15,10 +15,10 @@ use Viper\Core\Viewable;
 use App\Models\Client;
 
 /**
- * Sample controller class
+ * Blade view controller class
  * @package App\Controllers
  */
-class HomeController extends Controller implements GET
+class BladeController extends Controller implements GET
 {
 
     /**
@@ -29,7 +29,7 @@ class HomeController extends Controller implements GET
     public function get (...$args): ?Viewable
     {
         $clients = Client::all();
-        return view('Home', ['clients' => $clients]);
+        return blade('Home', ['clients' => $clients]);
     }
 
     /**
@@ -38,6 +38,15 @@ class HomeController extends Controller implements GET
      */
     public function add(): ?Viewable
     {
-        return view('Home/Add');
+        return blade('Add');
+    }
+
+    /**
+     * Provoking an error
+     * @return null|Viewable
+     */
+    public function provoke(): ?Viewable
+    {
+        return blade('Die');
     }
 }

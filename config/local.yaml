@@ -9,7 +9,14 @@ Domain: devcomposertest
 Require_https: No
 
 
-# MySQL database parameters
+# SQL database parameters
+#Db_dialect: SQLServer
+#Db_host: ARSENDELL\ROOT
+#Db_user: arsen
+#Db_pass: TreeHugger12345
+#Db_name: TestDB
+
+Db_dialect: MySQL
 Db_host: localhost
 Db_user: arsen
 Db_pass: TreeHugger12345
@@ -24,3 +31,4 @@ Db_allow_delete: true
 # May be used for API debugging,
 # needs prettyprint=true JSON parameter
 Pretty_print: true
+

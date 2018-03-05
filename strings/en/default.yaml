@@ -1,0 +1,15 @@
+
+header: Test Clients
+
+randomStr:
+  Enhanced version
+  Random string
+  1952871492874
+
+addMore: Add more    # Be careful! If this were called 'add', an array from add.yaml file would be returned instead
+                     # It is recommended to put all non-default .yaml files to 'default' dir
+
+name: Name
+email: Email
+age: Age
+img: Image
